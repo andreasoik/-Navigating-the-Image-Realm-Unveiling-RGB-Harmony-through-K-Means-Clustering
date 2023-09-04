@@ -1,0 +1,19 @@
+from os import listdir
+from PIL import Image as PImage
+img = PImage.open('image1.jpg')
+img=np.array(img,dtype=np.float64)
+img=img/img.max()
+
+w,h,d=img.shape
+image_array=np.reshape(img,(w*h,d))
+image_array_sample=shuffle(image_array,random_state=42)[:1500]
+n_colors=64
+kmeans=KMeans(n_clusters=n_colors,random_state=42).fit(image_array_sample)
+newcolors=kmeans.cluster_centers_[kmeans.predict(image_array)]
+new_image=newcolors.reshape(img.shape)
+
+plt.axis('off')
+plt.imshow(newimg)
+from PIL import Image
+im =Image.fromarray((newimg * 255).astype(np.uint8))
+im= im.save('image2.jpg')
