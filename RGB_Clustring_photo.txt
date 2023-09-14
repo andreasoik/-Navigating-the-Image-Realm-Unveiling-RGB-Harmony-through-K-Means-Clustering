@@ -1,6 +1,13 @@
-from os import listdir
 from PIL import Image as PImage
-img = PImage.open('image1.jpg')
+import numpy as np
+from sklearn.utils import shuffle
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+
+img = PImage.open('C:/Users/ANDREAS/Desktop/mirtos.jpg').rotate(270,expand=True)
+plt.axis('off')
+plt.imshow(img)
+
 img=np.array(img,dtype=np.float64)
 img=img/img.max()
 
@@ -13,7 +20,4 @@ newcolors=kmeans.cluster_centers_[kmeans.predict(image_array)]
 new_image=newcolors.reshape(img.shape)
 
 plt.axis('off')
-plt.imshow(newimg)
-from PIL import Image
-im =Image.fromarray((newimg * 255).astype(np.uint8))
-im= im.save('image2.jpg')
+plt.imshow(new_image)
